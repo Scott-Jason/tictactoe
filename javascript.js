@@ -40,7 +40,6 @@ const game = (function() {
     };
 })();
 
-
 function Player(name,symbol){
     this.name = name;
     this.symbol = symbol;
@@ -53,11 +52,14 @@ const p2 = new Player("Adam", 'O');
 // other stuff
 //garbage
 
+for(let i = 0; i < 10; i++){
+     gameBoard.makeMove(i, 'x');
 
+}
+console.log("JORG");
+console.log(gameBoard.getBoard());
+console.log(game.checkDraw(gameBoard.getBoard()));
 
-p2.moves.push(0);
-p2.moves.push(1);
-p2.moves.push(1);
 
 console.log("FRED");
 console.log(game.checkWin(p2.moves));
@@ -69,4 +71,3 @@ gameBoard.makeMove(1, 'x');
 
 console.log(gameBoard.getBoard().includes('o'));
 
-console.log(game.checkWin([0,1,3,2]));
