@@ -16,12 +16,21 @@ const gameBoard = (function() {
 })();
 
 const game = (function() {
-
+    whoseTurn = false;
     const winConditions = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
         [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
         [0, 4, 8], [2, 4, 6]             // Diagonals
     ];
+
+    function whose(){ 
+        if(whoseTurn){
+            whoseTurn = false;
+        }else{
+            whoseTurn = true;
+        }
+
+        return whoseTurn;}
 
     function checkWin(moves) {
         for(let i = 0; i < winConditions.length; i++){
@@ -36,7 +45,8 @@ const game = (function() {
 
     return{
         checkWin: checkWin,
-        checkDraw: checkDraw
+        checkDraw: checkDraw,
+        whose: whose
     };
 })();
 
@@ -49,25 +59,43 @@ function Player(name,symbol){
 const p1 = new Player("Jason", 'X');
 const p2 = new Player("Adam", 'O');
 
-// other stuff
-//garbage
 
-for(let i = 0; i < 10; i++){
-     gameBoard.makeMove(i, 'x');
+const header = document.querySelector(".header");
+const button = document.querySelector("button");
+button.addEventListener("click", () => {
+    location.reload();
+});
 
+//dom stuff
+for(let i = 1; i< 10; i++){
+    let cell = document.getElementById(`${i}`);
+    cell.addEventListener("click", () => {
+        cell.style.fontSize = "3rem";
+        if(cell.textContent != "🙅" && cell.textContent != "🙆"){
+            
+            if(game.whose()){
+                p1.moves.push(i);
+                gameBoard.makeMove(i-1, 'x');
+                cell.textContent = "🙅";
+                console.warn(game.checkWin(p1.moves));
+                if(game.checkWin(p1.moves)){
+                    header.textContent = "You have been Slain.";
+                }
+            }else{
+                p2.moves.push(i);
+                gameBoard.makeMove(i-1, 'o');
+                cell.textContent = "🙆";
+                console.warn(game.checkWin(p2.moves));
+                if(game.checkWin(p2.moves)){
+                    header.textContent = "You have chosen Death.";
+                }
+            }
+            console.table(gameBoard.getBoard());
+            console.log(game.checkDraw(gameBoard.getBoard()));
+            if(game.checkDraw(gameBoard.getBoard())){
+                header.textContent = "Evenly Skilled";
+            }
+        
+        }
+    });
 }
-console.log("JORG");
-console.log(gameBoard.getBoard());
-console.log(game.checkDraw(gameBoard.getBoard()));
-
-
-console.log("FRED");
-console.log(game.checkWin(p2.moves));
-
-
-console.table(gameBoard.getBoard());
-gameBoard.makeMove(1, 'x');
-
-
-console.log(gameBoard.getBoard().includes('o'));
-

@@ -1,0 +1,39 @@
+.main{
+    margin-left: calc(48vw - 120px);
+    margin-top: calc(48vh - 20vh - 120px);
+    display: grid;
+    grid-template: 80px 80px 80px / 80px 80px 80px;
+    align-content: stretch;
+ 
+}
+
+button{
+    padding: 20;
+   
+    margin-top: 5vh;
+    margin-left: calc(50% - (70px / 2));
+}
+
+.header{
+    color: black;
+    margin-top: 8vh;
+    margin-left: -1vh;
+    font-family: monospace;
+    text-align: center;
+    font-size: 3.5rem;
+}
+.outline{
+   /* outline: 1px solid red; */
+}
+
+.cell{
+    background: linear-gradient(to bottom right, #d6d3d1, #1c1917);
+    padding-top: 10px;
+    text-align: center;
+    
+}
+
+body{
+    background: linear-gradient(to right, rgba(90, 70, 143, 0.2), #1e293b);
+    
+}
