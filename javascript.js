@@ -67,7 +67,7 @@ button.addEventListener("click", () => {
 });
 
 //dom stuff
-for(let i = 1; i< 10; i++){
+for(let i = 0; i <= 8; i++){
     let cell = document.getElementById(`${i}`);
     cell.addEventListener("click", () => {
         cell.style.fontSize = "3rem";
@@ -75,7 +75,7 @@ for(let i = 1; i< 10; i++){
             
             if(game.whose()){
                 p1.moves.push(i);
-                gameBoard.makeMove(i-1, 'x');
+                gameBoard.makeMove(i, 'x');
                 cell.textContent = "🙅";
                 console.warn(game.checkWin(p1.moves));
                 if(game.checkWin(p1.moves)){
@@ -83,7 +83,7 @@ for(let i = 1; i< 10; i++){
                 }
             }else{
                 p2.moves.push(i);
-                gameBoard.makeMove(i-1, 'o');
+                gameBoard.makeMove(i, 'o');
                 cell.textContent = "🙆";
                 console.warn(game.checkWin(p2.moves));
                 if(game.checkWin(p2.moves)){
